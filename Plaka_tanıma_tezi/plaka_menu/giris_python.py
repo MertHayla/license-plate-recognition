@@ -26,7 +26,7 @@ class LoginPage(QWidget):
         self.close()
     def checkdegisim(self,state):
         if self.loginform.checkBox.isChecked():
-            self.loginform.lineEdit_2.setEchoMode(QLineEdit.Normal)##QtWidgets.QLineEdit.Password)
+            self.loginform.lineEdit_2.setEchoMode(QLineEdit.Normal)
         else:
             self.loginform.lineEdit_2.setEchoMode(QLineEdit.Password)
             

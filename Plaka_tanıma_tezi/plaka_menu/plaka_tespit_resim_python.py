@@ -12,8 +12,8 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pytesseract
 from PyQt5.QtSql import QSqlDatabase, QSqlQuery
-#from arac_ekle_python import *
-pytesseract.pytesseract.tesseract_cmd = "C:\Program Files\Tesseract-OCR\\tesseract.exe"
+
+pytesseract.pytesseract.tesseract_cmd = "C:\Program Files\Tesseract-OCR\\tesseract.exe"#BU PYTESSERACT KURULUMUNUN KONUMU OLACAK.
 
 
 arac_sayisi= 0
@@ -24,14 +24,11 @@ class Resim_tespitPage(QWidget):
         self.resim_tespitform.setupUi(self)
         self.resim_tespitform.pushButton_2.clicked.connect(self.browse)
         self.resim_tespitform.plaka_oku.clicked.connect(self.plakaokuma)
-        #self.resim_tespitform.resim_goster.clicked.connect(self.resim_goster_ac)
-        #self.resim_tespitform.bariyer_ac_resim.clicked.connect(self.plakakayitac)
         
-        #self.araceklemeac = AraceklePage()
     def plakakayitac(self):
         self.araceklemeac.show()
         
-    def browse(self):
+    def browse(self): # Dosya yolunun seçildiği bölüm.
         options = QFileDialog.Options()
         options |= QFileDialog.DontUseNativeDialog
         fileName, _ = QFileDialog.getOpenFileName(self,"QFileDialog.getOpenFileName()", "","All Files (*);;Python Files (*.py)", options=options)
@@ -41,7 +38,7 @@ class Resim_tespitPage(QWidget):
         pixmap = QPixmap(fileName)
         self.resim_tespitform.label_resim.setPixmap(pixmap)
         
-    def plakaokuma(self):
+    def plakaokuma(self): #plaka okumanın gerçekleştiği bölüm.
         resim_adres_line = self.resim_tespitform.lineEdit.text()
         img = cv2.imread(resim_adres_line)
         
@@ -81,7 +78,7 @@ class Resim_tespitPage(QWidget):
                 kon1 = muh_medyan>53 and muh_medyan<200 # yogunluk kontrolu (3)
                 kon2 = (w<483 and h<100)##(w<48 and h<170) or (h<50 and w<170) #sınır kontrolu (4)
                 kon3 = (w<100 and h<400) #or (h<50 and w<170) #sınır kontrolu (4)
-                #print(f"muh_plaka medyan:{muh_medyan} genislik: {w} yukseklik:{h}")
+                
                 kon=False
                 if(kon1 and (kon2 or kon3)):
                     cv2.drawContours(img,[box],0,(0,255,0),2)
@@ -114,14 +111,14 @@ class Resim_tespitPage(QWidget):
                     yenimetin= yenimetin.replace(silinecekler2,"")
                     plaka_yeni = silinmişveri.replace(silinecekler2,"")
                     
-                    plaka_ad = plaka_verileri[0].replace(silinecekler1,"")
+                    plaka_ad = plaka_verileri[0].replace(silinecekler1,"") # okunan verideki anlamsız ',' boşluk gibi karakterlerin silindiği bölüm
                     plaka_ad = plaka_ad.replace("[","")
                     plaka_ad =plaka_ad.replace("(","")
                     plaka_soyad = plaka_verileri[1].replace(silinecekler1,"")
                     
                     
 
-                    if str(yenimetin) == str(plaka_yeni):#str(plaka_metni+"\n"):
+                    if str(yenimetin) == str(plaka_yeni):
                         self.resim_tespitform.giris_izni.setText("Giriş İzni Var")
                         self.resim_tespitform.musteriadi.setText(plaka_ad+" "+plaka_soyad)
                     else:
@@ -139,6 +136,5 @@ class Resim_tespitPage(QWidget):
                     metin = None
                     
                     break
-    #def resim_goster_ac(self):
-        #self.resim_tespitform.label_resim.setScaledContents(True)
+    
         

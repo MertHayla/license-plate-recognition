@@ -18,7 +18,7 @@ ui.setupUi(pencere)
 
 baglanti= sqlite3.connect("kayit.db")
 islem = baglanti.cursor()
-#baglanti.commit()
+
 
         
 def kayitlistele():
@@ -37,9 +37,7 @@ def kayitlistele():
 
         
 
-#ui.tablo_arac.setHorizontalHeaderLabels("NO","AD","SOYAD","TEL","PLAKA","ARABA_TURU")
 
-############################
 ui.kayit_listele.clicked.connect(kayitlistele)
 
 class AraceklePage(QWidget):
@@ -62,12 +60,10 @@ class AraceklePage(QWidget):
         baglanti= sqlite3.connect("kayit.db")
         islem = baglanti.cursor()
         baglanti.commit()
-        #ui.tablo_arac.clear()
-        #ui.tablo_arac.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
-        #ui.tablo_arac.setHorizontalHeaderLabels(("NO","AD","SOYAD","TEL","PLAKA","ARABA TÜRÜ"))
+    
         sorgu = "select * from kayit"
         self.aracekleform.tablo_arac.clear()
-        #self.aracekleform.tablo_arac.horizontalHeader().setSectionResizeMode(QHeaderView.trect)
+        
         
         islem.execute(sorgu)
         
@@ -83,7 +79,7 @@ class AraceklePage(QWidget):
         sil_mesaj = QMessageBox.question(pencere,"Silme Onayi","Silmek istediğinize eminmisiniz ?")
         QMessageBox.Yes | QMessageBox.No
         if sil_mesaj == QMessageBox.Yes:
-            secilen_kayit = self.aracekleform.tablo_arac.selectedItems()#self.aracekleform.tablo_arac.selectedItems()
+            secilen_kayit = self.aracekleform.tablo_arac.selectedItems()
             
             silinecek_kayit = secilen_kayit[0].text()
             sorgu = "delete from kayit where ad = ?"
@@ -93,7 +89,7 @@ class AraceklePage(QWidget):
                 baglanti.commit()
                 
                 
-                #kayitlistele()
+                
             except:
                 pass
         else:
@@ -126,15 +122,12 @@ class AraceklePage(QWidget):
         fileName, _ = QFileDialog.getOpenFileName(self,"QFileDialog.getOpenFileName()", "","All Files (*);;Python Files (*.py)", options=options)
         if fileName:
             print(fileName)
-        self.aracekleform.lineEdit_browse.setText(fileName)#self.resim_tespitform.lineEdit.setText(fileName)
-        #pixmap = QPixmap(fileName)
-        #self.resim_tespitform.label_resim.setPixmap(pixmap)
-        #self.resize(pixmap.width(),pixmap.height())
-
+        self.aracekleform.lineEdit_browse.setText(fileName)
+        
     def plakaokuma(self):
-        resim_adres_line = self.aracekleform.lineEdit_browse.text()#self.resim_tespitform.lineEdit.text()
-        #resim_adresler = os.listdir(resim_adres_line)
-        img = cv2.imread(resim_adres_line)#+"/"+resim_adresler[0])
+        resim_adres_line = self.aracekleform.lineEdit_browse.text()
+        
+        img = cv2.imread(resim_adres_line)
         plt.imshow(cv2.cvtColor(img,cv2.COLOR_BGR2RGB))
         img_bgr = img
         img_gray = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
@@ -198,8 +191,7 @@ class AraceklePage(QWidget):
                     metin = None
                     
                     break
-    #def resim_goster_ac(self):
-        #self.resim_tespitform.label_resim.setScaledContents(True)
+    
         
 
 

@@ -1,0 +1,11 @@
+-PyQt5, sqlite3, cv2, matploylib, pyplot, numpyi sys,enum,serial,time kütüphanelerini kurmamız gerekir.
+-pylaka_menu dosyası masa üstüne kopyalanır.(veri yolunda türkçe karakter olduğu için çalışmayabiliyor)
+-pyteseseract kurulum.exe çalıştırılarak kurulum tamamlanır.
+-plaka_tespit_resim_python.py ve arac_ekle_python.py dosyasındaki pytesseract adresi bilgisayarda kurulu olan adresle değiştirilir.
+-arduino kodundaki RFID kartının ID si değiştirilir.
+-arduino devresi kurulur ve Arduino kodu arduino ya yüklenir.
+-main.py dosyası açılır.
+-Login Ekranının Kullanıcı adı : Mert Şifresi:123 dür.
+-Resim ile plaka tespiti tıklanarak plaka tespit menüsü açılır.
+-veri seti içindeki resimlerden biri seçilerek plaka tespiti yapılır.
+-
